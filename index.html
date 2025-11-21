@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>اپلیکیشن PWA کیک‌بوکسینگ</title>
+
+<!-- PWA Requirements -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<style>
+body {
+  margin:0;
+  padding:0;
+  font-family:sans-serif;
+  background:#0d0d0d;
+  color:#e6e6e6;
+}
+.mobile-menu {
+  position:fixed;
+  top:0;
+  right:0;
+  width:75%;
+  height:100%;
+  background:rgba(20,20,20,0.92);
+  padding:25px;
+  backdrop-filter:blur(12px);
+  display:flex;
+  flex-direction:column;
+  transform:translateX(100%);
+  transition:0.4s ease;
+}
+.mobile-menu a {
+  padding:14px 0;
+  text-decoration:none;
+  color:#e6e6e6;
+  border-bottom:1px solid #222;
+  font-size:1.2rem;
+}
+
+.hamburger {
+  position:fixed;
+  top:18px;
+  right:18px;
+  font-size:28px;
+  cursor:pointer;
+  color:white;
+  z-index:999;
+}
+
+.mobile-menu.show {
+  transform:translateX(0);
+}
+
+@keyframes airflowFade {
+  0%{opacity:0; transform:translateY(25px) scale(.95);}
+  70%{opacity:1;}
+  100%{opacity:1; transform:translateY(0) scale(1);}
+}
+.mobile-menu a {
+  animation: airflowFade .6s ease both;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+
+<div id="mobileMenu" class="mobile-menu">
+  <a href="#">🏠 صفحه اصلی</a>
+  <a href="#">📜 درباره قهرمانی</a>
+  <a href="#">🖼️ گالری</a>
+  <a href="#">🎥 ویدیوها</a>
+  <a href="#">📊 آمار</a>
+  <a href="#">🥋 مربیان</a>
+  <a href="#">☎️ تماس</a>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("show");
+}
+
+// Register Service Worker
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
